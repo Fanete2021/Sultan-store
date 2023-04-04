@@ -1,0 +1,131 @@
+.editor {
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.editor__content {
+    width: 500px;
+    border-radius: 16px;
+    height: 700px;
+    background-color: rgb(255, 255, 255);
+    margin: 0 auto;
+    position: relative;
+}
+
+.editor__close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}
+
+.editor__inputs {
+    margin: 10px 15px 0;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 14px;
+
+    .inputs__url-image {
+        input {
+            width: 87%;
+        }
+
+        .url-image__content {
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+                width: 270px;
+                height: 230px;
+            }
+        }
+    }
+
+    .inputs__size {
+        input {
+            width: 65px;
+        }
+
+        select {
+            margin-left: 5px;
+        }
+    }
+
+    .inputs__description {
+        input {
+            width: 230px;
+        }
+    }
+
+    .inputs__manufacturer {
+        input {
+            width: 100px;
+        }
+    }
+
+    .inputs__price {
+        input {
+            width: 60px;
+        }
+    }
+
+    input {
+        margin-top: 5px;
+        background: #ededed;
+        border-radius: 36px;
+        outline: none;
+        height: 20px;
+        border: none;
+        font-weight: 900;
+        font-size: 12px;
+        line-height: 14px;
+    }
+
+    .inputs__categories {
+        justify-content: space-between;
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+
+        .categories__title {
+            flex-basis: 100%;
+        }
+
+        .categories__category {
+            display: flex;
+            flex-basis: 28%;
+            margin-top: 10px;
+            font-size: 12px;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+
+.editor__actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 39px;
+        height: 39px;
+        background: #ffc85e;
+        border-radius: 1000px;
+        cursor: pointer;
+        margin: 0 5px;
+    }
+}

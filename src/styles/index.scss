@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap');
+@import 'variables';
+@import 'header';
+@import 'footer';
+@import 'catalog';
+@import 'filter';
+@import 'list';
+@import 'product';
+@import 'productPage';
+@import 'cart';
+@import 'editor';
+
+body {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-style: normal;
+
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}

@@ -1,0 +1,178 @@
+.footer {
+    background: #3f4e65;
+    height: 500px;
+    display: flex;
+    padding: 0 $indentContent;
+    justify-content: space-between;
+    margin-top: 100px;
+
+    color: #ffffff;
+}
+
+.footer__sultan {
+    filter: brightness(0) invert(1);
+}
+
+.footer__content {
+    margin-top: 71px;
+    flex-basis: 15%;
+}
+
+.footer__describe {
+    font-size: 16px;
+    line-height: 24px;
+    margin-top: 15px;
+}
+
+.footer__promotions {
+    position: relative;
+    margin-top: 45px;
+
+    .promotions__describe {
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .promotions__input {
+        display: flex;
+        margin-top: 14px;
+
+        input {
+            padding-left: 20px;
+            width: 262px;
+            height: 59px;
+            border-radius: 36px;
+            background: #ffffff;
+            border: none;
+            outline: none;
+            color: #5c6370;
+        }
+
+        .input__send {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffc85e;
+            border-radius: 1000px;
+            width: 39px;
+            height: 39px;
+            position: absolute;
+            right: 10px;
+            top: 42.5px;
+        }
+    }
+}
+
+.footer__links {
+    .links__title {
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 30px;
+        padding-bottom: 5px;
+    }
+
+    .links__item {
+        margin-top: 20px;
+        font-size: 14px;
+        line-height: 21px;
+    }
+}
+
+.footer__price-list {
+    .price-list__title {
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+    .price-list__bottom {
+        margin-top: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #ffc85e;
+        border-radius: 79px;
+        width: 214px;
+        height: 59px;
+
+        .bottom__description {
+            margin-right: 7.5px;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 17px;
+        }
+
+        img {
+            margin-left: 7.5px;
+        }
+    }
+}
+
+.footer__social-network {
+    margin-top: 20px;
+
+    .social-network__title {
+        font-size: 14px;
+        line-height: 21px;
+    }
+
+    .social-network__links {
+        margin-top: 15px;
+
+        :not(:first-child) {
+            margin-left: 10px;
+        }
+    }
+}
+
+.footer__contacts {
+    .contacts__title {
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+    .contacts__phone {
+        margin-top: 25px;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 21px;
+    }
+
+    .contacts__schedule {
+        margin-top: 5px;
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .contacts__call {
+        margin-top: 5px;
+        font-weight: 400;
+        font-size: 10px;
+        line-height: 15px;
+
+        text-decoration-line: underline;
+    }
+
+    .contacts__email {
+        margin-top: 25px;
+
+        .email__content {
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 18px;
+        }
+
+        .email__schedule {
+            font-weight: 300;
+            font-size: 12px;
+        }
+    }
+}
+
+.footer__payment {
+    margin-top: 25px;
+
+    :not(:first-child) {
+        margin-left: 5px;
+    }
+}
