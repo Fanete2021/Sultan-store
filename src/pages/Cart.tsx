@@ -5,12 +5,10 @@ import { cartSlice } from '../store/reducers/slices/CartSlice'
 import Bottle from '../../public/images/Bottle.png'
 import Box from '../../public/images/Box.png'
 import Trash from '../../public/images/Trash.png'
-import { catalogPageURL, productionURL } from '../constants'
+import { catalogPageURL } from '../constants'
 import { selectCart } from '../store/reducers/Selectors'
 import PagesLinks from '../components/PagesLinks'
 import '../styles/cart.scss'
-
-const baseUrl = process.env.NODE_ENV === 'production' ? productionURL : ''
 
 function Cart() {
     const dispatch = useAppDispatch()
@@ -21,7 +19,7 @@ function Cart() {
     return (
         <div className="cart">
             <PagesLinks>
-                <Link to={`${baseUrl}${catalogPageURL}`}>Главная</Link>
+                <Link to={`${catalogPageURL}`}>Главная</Link>
                 <div>Корзина</div>
             </PagesLinks>
 

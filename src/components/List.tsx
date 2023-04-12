@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Slider from '../../public/images/Slider.png'
 import '../styles/list.scss'
 

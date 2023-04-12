@@ -9,7 +9,7 @@ import Download from '../../public/images/Download.png'
 import Cart from '../../public/images/Cart.png'
 import Burger from '../../public/images/Burger.png'
 import { Link } from 'react-router-dom'
-import { cartPageURL, catalogPageURL, productionURL } from '../constants'
+import { cartPageURL, catalogPageURL } from '../constants'
 import { selectCart } from '../store/reducers/Selectors'
 import '../styles/header.scss'
 
@@ -50,8 +50,6 @@ const links: ILink[] = [
         description: 'Контакты',
     },
 ]
-
-const baseUrl = process.env.NODE_ENV === 'production' ? productionURL : ''
 
 const Header: FC = () => {
     const cart = selectCart()
@@ -94,7 +92,7 @@ const Header: FC = () => {
                         <img src={Sultan} alt=""></img>
                     </div>
 
-                    <Link to={`${baseUrl}${catalogPageURL}`}>
+                    <Link to={`${catalogPageURL}`}>
                         <div className="active__catalog">
                             <span>Каталог</span>
                             <img src={Catalog} alt=""></img>
@@ -126,7 +124,7 @@ const Header: FC = () => {
                         </div>
                     </div>
 
-                    <Link to={`${baseUrl}${cartPageURL}`}>
+                    <Link to={`${cartPageURL}`}>
                         <div className="active__cart">
                             <img src={Cart} alt=""></img>
                             <div className="active__cart__items">{cart.countAll}</div>

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import Sultan from '../../public/images/Sultan.png'
 import Arrow from '../../public/images/Arrow.png'
 import Download from '../../public/images/Download.png'

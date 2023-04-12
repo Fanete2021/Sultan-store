@@ -9,14 +9,12 @@ import { cartSlice } from '../store/reducers/slices/CartSlice'
 import { useAppDispatch } from '../hooks/redux'
 import { ICartItem } from '../models/ICart'
 import { editorSlice } from '../store/reducers/slices/EditorSlice'
-import { catalogPageURL, productionURL } from '../constants'
+import { catalogPageURL } from '../constants'
 import '../styles/product.scss'
 
 interface ProductProps {
     product: IProduct
 }
-
-const baseUrl = process.env.NODE_ENV === 'production' ? productionURL : ''
 
 const Product: FC<ProductProps> = ({ product }) => {
     const dispatch = useAppDispatch()
@@ -40,7 +38,7 @@ const Product: FC<ProductProps> = ({ product }) => {
     return (
         <div className="product">
             <div className="product__image">
-                <Link to={`${baseUrl}${catalogPageURL}/` + product.id}>
+                <Link to={`${catalogPageURL}/` + product.id}>
                     <img src={product.urlImage} alt=""></img>
                 </Link>
             </div>

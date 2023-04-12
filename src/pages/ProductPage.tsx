@@ -10,7 +10,7 @@ import Download from '../../public/images/Download.png'
 import Show from '../../public/images/Show.png'
 import { cartSlice } from '../store/reducers/slices/CartSlice'
 import { ICartItem } from '../models/ICart'
-import { catalogPageURL, productionURL } from '../constants'
+import { catalogPageURL } from '../constants'
 import { selectProducts } from '../store/reducers/Selectors'
 import PagesLinks from '../components/PagesLinks'
 import '../styles/productPage.scss'
@@ -19,8 +19,6 @@ interface ProductPageParams {
     id: string
     [key: string]: string
 }
-
-const baseUrl = process.env.NODE_ENV === 'production' ? productionURL : ''
 
 const ProductPage: FC = () => {
     const params = useParams<ProductPageParams>()
@@ -63,7 +61,7 @@ const ProductPage: FC = () => {
         <div className="product-page">
             <PagesLinks>
                 <div>Главная</div>
-                <Link to={`${baseUrl}${catalogPageURL}`}>Каталог</Link>
+                <Link to={`${catalogPageURL}`}>Каталог</Link>
                 <div>{product?.title}</div>
             </PagesLinks>
 
