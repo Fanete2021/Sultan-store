@@ -7177,7 +7177,6 @@ __webpack_require__.r(__webpack_exports__);
 var baseUrl =  true ? _constants__WEBPACK_IMPORTED_MODULE_8__.productionURL : 0;
 var Product = function Product(_ref) {
   var product = _ref.product;
-  console.log(product.categories);
   var dispatch = (0,_hooks_redux__WEBPACK_IMPORTED_MODULE_6__.useAppDispatch)();
   var addItem = _store_reducers_slices_CartSlice__WEBPACK_IMPORTED_MODULE_5__.cartSlice.actions.addItem;
   var _editorSlice$actions = _store_reducers_slices_EditorSlice__WEBPACK_IMPORTED_MODULE_7__.editorSlice.actions,
@@ -15080,7 +15079,7 @@ function n(n){for(var r=arguments.length,t=Array(r>1?r-1:0),e=1;e<r;e++)t[e-1]=a
 /******/ 	
 /******/ 	/* webpack/runtime/publicPath */
 /******/ 	!function() {
-/******/ 		__webpack_require__.p = "/";
+/******/ 		__webpack_require__.p = "";
 /******/ 	}();
 /******/ 	
 /************************************************************************/
