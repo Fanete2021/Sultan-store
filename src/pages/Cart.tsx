@@ -1,35 +1,42 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../hooks/redux'
-import { cartSlice } from '../store/reducers/CartSlice'
+import { useAppDispatch } from '../hooks/redux'
+import { cartSlice } from '../store/reducers/slices/CartSlice'
 import Bottle from '../../public/images/Bottle.png'
 import Box from '../../public/images/Box.png'
 import Trash from '../../public/images/Trash.png'
+import { catalogPageURL, productionURL } from '../constants'
+import { selectCart } from '../store/reducers/Selectors'
+import PagesLinks from '../components/PagesLinks'
+import '../styles/cart.scss'
+
+const baseUrl = process.env.NODE_ENV === 'production' ? productionURL : ''
 
 function Cart() {
     const dispatch = useAppDispatch()
-    const cart = useAppSelector((state) => state.cartReducer)
+    const cart = selectCart()
     const { deleteItemById, clearCart, decreaseCountItemById, increaseCountItemById } =
         cartSlice.actions
 
     return (
         <div className="cart">
-            <div className="cart__pages">
-                <div className="pages__main">
-                    <Link to={`/Sultan-store/catalog`}>Главная</Link>
-                </div>
-                <div className="pages__current">Корзина</div>
-            </div>
+            <PagesLinks>
+                <Link to={`${baseUrl}${catalogPageURL}`}>Главная</Link>
+                <div>Корзина</div>
+            </PagesLinks>
 
             <div className="cart__title">Корзина</div>
 
             <div className="cart__items">
                 {cart.items.map((item) => (
                     <div className="items__item">
-                        <img className="item__image" src={item.product.urlImage} />
+                        <img className="item__image" src={item.product.urlImage} alt="" />
                         <div className="item__info">
                             <div className="info__size">
-                                <img src={item.product.sizeType.indexOf('л') >= 0 ? Bottle : Box} />
+                                <img
+                                    src={item.product.sizeType.indexOf('л') >= 0 ? Bottle : Box}
+                                    alt=""
+                                />
                                 <div className="size__value">
                                     {item.product.size} {item.product.sizeType}
                                 </div>
@@ -67,7 +74,7 @@ function Cart() {
                                 className="actions__delete"
                                 onClick={() => dispatch(deleteItemById(item.product.id))}
                             >
-                                <img src={Trash} />
+                                <img src={Trash} alt="" />
                             </div>
                         </div>
                     </div>

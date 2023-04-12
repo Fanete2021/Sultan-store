@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { IEditor } from '../../models/IEditor'
-import { IProduct } from '../../models/IProduct'
+import { IEditor } from '../../../models/IEditor'
+import { IProduct } from '../../../models/IProduct'
 
 const initialState: IEditor = {
     product: undefined,

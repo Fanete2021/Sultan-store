@@ -1,0 +1,66 @@
+[
+    {
+        "category": "Уход за телом",
+        "subcategories": [
+            { "title": "Эпиляция и депиляция", "id": 1 },
+            { "title": "Средства для ванны и душа", "id": 2 },
+            { "title": "Скрабы, пиллинги и пр.", "id": 3 },
+            { "title": "Мочалки и губки для тела", "id": 4 },
+            { "title": "Кремы, лосьоны, масла", "id": 5 },
+            { "title": "Интимный уход", "id": 6 },
+            { "title": "Дезодоранты, антиперспиранты", "id": 7 },
+            { "title": "Гели для душа", "id": 8 }
+        ],
+        "id": 1
+    },
+    {
+        "category": "Уход за руками",
+        "subcategories": [],
+        "id": 2
+    },
+    {
+        "category": "Уход за ногами",
+        "subcategories": [],
+        "id": 3
+    },
+    {
+        "category": "Уход за лицом",
+        "subcategories": [],
+        "id": 4
+    },
+    {
+        "category": "Уход за волосами",
+        "subcategories": [],
+        "id": 5
+    },
+    {
+        "category": "Средства для загара",
+        "subcategories": [],
+        "id": 6
+    },
+    {
+        "category": "Средства для бритья",
+        "subcategories": [],
+        "id": 7
+    },
+    {
+        "category": "Подарочные наборы",
+        "subcategories": [],
+        "id": 8
+    },
+    {
+        "category": "Гигиеническая продукция",
+        "subcategories": [],
+        "id": 9
+    },
+    {
+        "category": "Гигиена полости рта",
+        "subcategories": [],
+        "id": 10
+    },
+    {
+        "category": "Бумажная продукция",
+        "subcategories": [],
+        "id": 11
+    }
+]

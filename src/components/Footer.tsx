@@ -6,59 +6,60 @@ import WhatsApp from '../../public/images/WhatsApp.png'
 import Telegram from '../../public/images/Telegram.png'
 import Visa from '../../public/images/Visa.png'
 import Mastercard from '../../public/images/Mastercard.png'
+import '../styles/footer.scss'
 
 interface ILink {
     description: string
 }
 
+const menuItems: ILink[] = [
+    {
+        description: 'О компании',
+    },
+    {
+        description: 'Доставка и оплата',
+    },
+    {
+        description: 'Возврат',
+    },
+    {
+        description: 'Контакты',
+    },
+]
+
+const categoryItems: ILink[] = [
+    {
+        description: 'Бытовая химия',
+    },
+    {
+        description: 'Косметика и гигиена',
+    },
+    {
+        description: 'Товары для дома',
+    },
+    {
+        description: 'Товары для детей и мам',
+    },
+    {
+        description: 'Посуда',
+    },
+]
+
 const Footer: FC = () => {
-    const menuItems: ILink[] = [
-        {
-            description: 'О компании',
-        },
-        {
-            description: 'Доставка и оплата',
-        },
-        {
-            description: 'Возврат',
-        },
-        {
-            description: 'Контакты',
-        },
-    ]
-
-    const categoryItems: ILink[] = [
-        {
-            description: 'Бытовая химия',
-        },
-        {
-            description: 'Косметика и гигиена',
-        },
-        {
-            description: 'Товары для дома',
-        },
-        {
-            description: 'Товары для детей и мам',
-        },
-        {
-            description: 'Посуда',
-        },
-    ]
-
     return (
         <div className="footer">
             <div className="footer__content">
-                <img className="footer__sultan" src={Sultan}></img>
+                <img className="footer__sultan" src={Sultan} alt=""></img>
                 <div className="footer__describe">
-                    Компания «Султан» — снабжаем розничные магазины товарами "под ключ" в Кокчетаве и Акмолинской
-                    области
+                    Компания «Султан» — снабжаем розничные магазины товарами "под ключ" в Кокчетаве
+                    и Акмолинской области
                 </div>
                 <div className="footer__promotions">
                     <div className="promotions__describe">Подпишись на скидки и акции</div>
                     <div className="promotions__input">
                         <input placeholder="Введите ваш E-mail"></input>
                         <div className="input__send">
-                            <img src={Arrow}></img>
+                            <img src={Arrow} alt=""></img>
                         </div>
                     </div>
                 </div>
@@ -91,14 +92,14 @@ const Footer: FC = () => {
                     <div className="price-list__title">Скачать прайс-лист:</div>
                     <div className="price-list__bottom">
                         <div className="bottom__description">Прайс-лист</div>
-                        <img src={Download} />
+                        <img src={Download} alt="" />
                     </div>
                 </div>
                 <div className="footer__social-network">
                     <div className="social-network__title">Связь в мессенджерах</div>
                     <div className="social-network__links">
-                        <img src={WhatsApp} />
-                        <img src={Telegram} />
+                        <img src={WhatsApp} alt="" />
+                        <img src={Telegram} alt="" />
                     </div>
                 </div>
             </div>
@@ -116,8 +117,8 @@ const Footer: FC = () => {
                 </div>
 
                 <div className="footer__payment">
-                    <img src={Visa} />
-                    <img src={Mastercard} />
+                    <img src={Visa} alt="" />
+                    <img src={Mastercard} alt="" />
                 </div>
             </div>
         </div>

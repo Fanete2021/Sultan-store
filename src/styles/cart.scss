@@ -1,23 +1,7 @@
+@import 'variables';
+
 .cart {
     margin: 45px $indentContent 0;
-}
-
-.cart__pages {
-    display: flex;
-    color: #3f4e65;
-    line-height: 17px;
-    font-weight: 300;
-    font-size: 14px;
-
-    .pages__main {
-        border-right: 1px dashed #3f4e657e;
-        padding-right: 5px;
-    }
-
-    .pages__current {
-        margin-left: 5px;
-        opacity: 0.5;
-    }
 }
 
 .cart__title {

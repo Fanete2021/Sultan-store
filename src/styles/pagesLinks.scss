@@ -1,0 +1,21 @@
+.pages {
+    display: flex;
+    color: #3f4e65;
+    line-height: 17px;
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 45px;
+
+    :not(:last-child) {
+        border-right: 1px dashed #3f4e657e;
+        padding-right: 5px;
+    }
+
+    :not(:first-child) {
+        margin-left: 5px;
+    }
+
+    :last-child {
+        opacity: 0.5;
+    }
+}

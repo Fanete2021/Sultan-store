@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../hooks/redux'
+import { useAppDispatch } from '../hooks/redux'
 import { IProduct } from '../models/IProduct'
 import Cart from '../../public/images/Cart.png'
 import Bottle from '../../public/images/Bottle.png'
@@ -8,17 +8,23 @@ import Box from '../../public/images/Box.png'
 import Share from '../../public/images/Share.png'
 import Download from '../../public/images/Download.png'
 import Show from '../../public/images/Show.png'
-import { cartSlice } from '../store/reducers/CartSlice'
+import { cartSlice } from '../store/reducers/slices/CartSlice'
 import { ICartItem } from '../models/ICart'
+import { catalogPageURL, productionURL } from '../constants'
+import { selectProducts } from '../store/reducers/Selectors'
+import PagesLinks from '../components/PagesLinks'
+import '../styles/productPage.scss'
 
 interface ProductPageParams {
     id: string
     [key: string]: string
 }
 
+const baseUrl = process.env.NODE_ENV === 'production' ? productionURL : ''
+
 const ProductPage: FC = () => {
     const params = useParams<ProductPageParams>()
-    const { products } = useAppSelector((state) => state.productReducer)
+    const { products } = selectProducts()
     const [product, setProduct] = useState<IProduct | null>(null)
     const [countToPurchase, setCountToPurchase] = useState<number>(1)
     const [isShowDescription, setIsShowDescription] = useState<boolean>(true)
@@ -35,19 +41,35 @@ const ProductPage: FC = () => {
         }
     }, [products])
 
+    const buyClickHandler = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (product) {
+            const cartItem: ICartItem = {
+                product: product,
+                count: countToPurchase,
+            }
+            dispatch(addItem(cartItem))
+        }
+    }
+
+    const decreaseCountClickHandler = (e: React.MouseEvent<HTMLDivElement>) => {
+        setCountToPurchase(countToPurchase > 1 ? countToPurchase - 1 : 1)
+    }
+
+    const increaseCountClickHandler = (e: React.MouseEvent<HTMLDivElement>) => {
+        setCountToPurchase(countToPurchase + 1)
+    }
+
     return (
         <div className="product-page">
-            <div className="product-page__path">
-                <span className="path__main">Главная</span>
-                <Link to={`/Sultan-store/catalog`}>
-                    <span className="path__pages">Каталог</span>
-                </Link>
-                <span className="path__current-page">{product?.title}</span>
-            </div>
+            <PagesLinks>
+                <div>Главная</div>
+                <Link to={`${baseUrl}${catalogPageURL}`}>Каталог</Link>
+                <div>{product?.title}</div>
+            </PagesLinks>
 
             <div className="page__product">
                 <div className="product__left">
-                    <img src={product?.urlImage} />
+                    <img src={product?.urlImage} alt="" />
                 </div>
 
                 <div className="product__right">
@@ -67,6 +89,7 @@ const ProductPage: FC = () => {
                                     ? Bottle
                                     : Box
                             }
+                            alt=""
                         />
                         <div className="size__value">
                             {product?.size} {product?.sizeType}
@@ -77,45 +100,24 @@ const ProductPage: FC = () => {
                         <div className="page__buy__price">{product?.price} ₸</div>
 
                         <div className="page__buy__count">
-                            <div
-                                onClick={() =>
-                                    setCountToPurchase(
-                                        countToPurchase > 1 ? countToPurchase - 1 : 1
-                                    )
-                                }
-                                className="count__decreace"
-                            >
+                            <div onClick={decreaseCountClickHandler} className="count__decrease">
                                 -
                             </div>
                             <div className="count__value">{countToPurchase}</div>
-                            <div
-                                onClick={() => setCountToPurchase(countToPurchase + 1)}
-                                className="count__increace"
-                            >
+                            <div onClick={increaseCountClickHandler} className="count__increase">
                                 +
                             </div>
                         </div>
 
-                        <div
-                            className="page__buy__button"
-                            onClick={() => {
-                                if (product) {
-                                    const cartItem: ICartItem = {
-                                        product: product,
-                                        count: countToPurchase,
-                                    }
-                                    dispatch(addItem(cartItem))
-                                }
-                            }}
-                        >
+                        <div className="page__buy__button" onClick={buyClickHandler}>
                             <div className="button__description">В корзину</div>
-                            <img src={Cart} />
+                            <img src={Cart} alt="" />
                         </div>
                     </div>
 
                     <div className="product__activities">
                         <div className="activities__share">
-                            <img src={Share} />
+                            <img src={Share} alt="" />
                         </div>
                         <div className="activities__promotion">
                             При покупке от <span>10 000 ₸</span> бесплатная <br />
@@ -123,7 +125,7 @@ const ProductPage: FC = () => {
                         </div>
                         <div className="activities__price-list">
                             <span>Прайс-лист</span>
-                            <img src={Download} />
+                            <img src={Download} alt="" />
                         </div>
                     </div>
 
@@ -136,6 +138,7 @@ const ProductPage: FC = () => {
                                 onClick={(e) => setIsShowDescription(!isShowDescription)}
                                 className={isShowDescription ? '' : 'rotate'}
                                 src={Show}
+                                alt=""
                             />
                         </div>
                         {isShowDescription && (
@@ -159,8 +162,10 @@ const ProductPage: FC = () => {
                                 onClick={(e) => setIsShowCharacteristics(!isShowCharacteristics)}
                                 className={isShowCharacteristics ? '' : 'rotate'}
                                 src={Show}
+                                alt=""
                             />
                         </div>
+
                         {isShowCharacteristics && (
                             <div className="characteristics__content">
                                 <div className="content__item">

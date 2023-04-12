@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { IProduct } from '../../models/IProduct'
+import { IProduct } from '../../../models/IProduct'
 import {
     addProductToLocalStorage,
     deleteProductFromLocalStorage,
     updateProductInLocalStorage,
-} from '../../utils/localStorage'
-import { fetchProducts } from './ActionCreators'
-import db from '../../../db.json'
+} from '../../../utils/localStorage'
+import { fetchProducts } from '../ActionCreators'
+import db from '../../../../data/products.json'
 
-interface IProductState {
+export interface IProductState {
     products: IProduct[]
     isLoading: boolean
     error: string

@@ -2,9 +2,9 @@ export interface IFilterProducts {
     brands: string[]
     minPrice: number
     maxPrice: number
-    category: string
+    category: number
     sort: ISort
-    subcategories: string[]
+    subcategories: number[]
 }
 
 export interface ISort {

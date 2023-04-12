@@ -1,10 +1,11 @@
 import React, { FC, useEffect, useState } from 'react'
-import { useAppDispatch, useAppSelector } from '../hooks/redux'
+import { useAppDispatch } from '../hooks/redux'
 import { IBrand } from '../models/IBrand'
-import { filterProductsSlice } from '../store/reducers/FilterProductsSlice'
+import { filterProductsSlice } from '../store/reducers/slices/FilterProductsSlice'
 import Show from '../../public/images/Show.png'
 import Magnifier from '../../public/images/Magnifier.png'
-import { categories } from '../types/categories'
+import { selectCategories, selectFilterProducts } from '../store/reducers/Selectors'
+import '../styles/filter.scss'
 
 interface FilterProps {
     brands: IBrand[]
@@ -20,7 +21,9 @@ const Filter: FC<FilterProps> = ({ brands }) => {
     const dispatch = useAppDispatch()
     const { changeMinPrice, changeMaxPrice, changeBrands, changeSubcategories, changeCategory } =
         filterProductsSlice.actions
-    const filterProducts = useAppSelector((state) => state.filterProductsReducer)
+    const filterProducts = selectFilterProducts()
+
+    const { categories } = selectCategories()
 
     useEffect(() => {
         setPriceMin(filterProducts.minPrice)
@@ -59,7 +62,7 @@ const Filter: FC<FilterProps> = ({ brands }) => {
         setIsShowFullBrands(!isShowFullBrands)
     }
 
-    const subcategoryDivHandler = (category: string, subcategory: string) => {
+    const subcategoryDivHandler = (category: number, subcategory: number) => {
         const isSelected: boolean = filterProducts.subcategories.indexOf(subcategory) >= 0
 
         if (!filterProducts.subcategories.length && filterProducts.category !== category) {
@@ -136,6 +139,7 @@ const Filter: FC<FilterProps> = ({ brands }) => {
                                     className={isShowFullBrands ? 'show__rotate' : ''}
                                     onClick={showFullBrands}
                                     src={Show}
+                                    alt=""
                                 />
                             </div>
                             {isShowFullBrands &&
@@ -158,26 +162,28 @@ const Filter: FC<FilterProps> = ({ brands }) => {
             </div>
 
             <div className="filter__tags">
-                {categories.slice(0, 1).map((category, indexCat) => (
-                    <div key={indexCat} className="tags__content">
-                        <div className="content__title">{category.category}</div>
-                        {category.subcategories.map((subcategory, indexSub) => (
-                            <div
-                                key={indexSub}
-                                className={
-                                    filterProducts.subcategories.includes(subcategory)
-                                        ? 'content__item content__item-active'
-                                        : 'content__item'
-                                }
-                                onClick={(e) =>
-                                    subcategoryDivHandler(category.category, subcategory)
-                                }
-                            >
-                                {subcategory}
-                            </div>
-                        ))}
-                    </div>
-                ))}
+                {categories
+                    .slice(0, 1)
+                    .map(({ category, subcategories, id: idCategory }, indexCat) => (
+                        <div key={indexCat} className="tags__content">
+                            <div className="content__title">{category}</div>
+                            {subcategories.map(({ title, id: idSubcategory }, indexSub) => (
+                                <div
+                                    key={indexSub}
+                                    className={
+                                        filterProducts.subcategories.includes(idSubcategory)
+                                            ? 'content__item content__item-active'
+                                            : 'content__item'
+                                    }
+                                    onClick={(e) =>
+                                        subcategoryDivHandler(idCategory, idSubcategory)
+                                    }
+                                >
+                                    {title}
+                                </div>
+                            ))}
+                        </div>
+                    ))}
             </div>
         </div>
     )

@@ -1,29 +1,7 @@
+@import 'variables';
+
 .catalog {
     margin: 0 $indentContent;
-}
-
-.catalog__page {
-    display: flex;
-    margin-top: 45px;
-
-    :not(:first-child) {
-        border-left: 1px dashed #3f4e65;
-    }
-
-    .page__title {
-        padding-right: 10px;
-        font-size: 14px;
-        line-height: 17px;
-        color: #3f4e65;
-    }
-
-    .page__subpage {
-        padding-left: 10px;
-        font-size: 14px;
-        line-height: 17px;
-        color: #3f4e65;
-        opacity: 0.5;
-    }
 }
 
 .catalog__view {

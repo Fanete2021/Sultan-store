@@ -5,27 +5,35 @@ import Editor from '../components/Editor'
 import Filter from '../components/Filter'
 import List from '../components/List'
 import Product from '../components/Product'
-import { useAppDispatch, useAppSelector } from '../hooks/redux'
+import { useAppDispatch } from '../hooks/redux'
 import { IBrand } from '../models/IBrand'
 import { IProduct } from '../models/IProduct'
-import { filterProductsSlice } from '../store/reducers/FilterProductsSlice'
-import { categories } from '../types/categories'
+import { filterProductsSlice } from '../store/reducers/slices/FilterProductsSlice'
 import { calculateBrands } from '../utils/brands'
+import { editorSlice } from '../store/reducers/slices/EditorSlice'
+import {
+    selectCategories,
+    selectEditor,
+    selectFilterProducts,
+    selectProducts,
+} from '../store/reducers/Selectors'
 import { sortProducts } from '../utils/sortProducts'
-import { editorSlice } from '../store/reducers/EditorSlice'
+import PagesLinks from '../components/PagesLinks'
+import '../styles/catalog.scss'
 
 function Catalog() {
-    const [subpage, setSubpage] = useState<string>('Косметика и гигиена')
     const [brands, setBrands] = useState<IBrand[]>([])
 
     const dispatch = useAppDispatch()
-    const { products } = useAppSelector((state) => state.productReducer)
+    const { products } = selectProducts()
 
-    const filterProducts = useAppSelector((state) => state.filterProductsReducer)
+    const filterProducts = selectFilterProducts()
     const { changeCategory, changeSort } = filterProductsSlice.actions
 
-    const { isShowing } = useAppSelector((state) => state.editorReducer)
+    const { isShowing } = selectEditor()
     const { changeShowing, deleteEditableProduct } = editorSlice.actions
+
+    const { categories } = selectCategories()
 
     const [sortedProducts, setSortedPoducts] = useState<IProduct[]>([])
 
@@ -66,37 +74,36 @@ function Catalog() {
         )
     }
 
-    const filterClickHandler = (e: React.MouseEvent<HTMLDivElement>, title: string) => {
-        let isSelected: boolean = filterProducts.category === title
+    const filterClickHandler = (e: React.MouseEvent<HTMLDivElement>, category: number) => {
+        let isSelected: boolean = filterProducts.category === category
 
         if (isSelected) {
-            dispatch(changeCategory(''))
+            dispatch(changeCategory(0))
         } else {
-            dispatch(changeCategory(title))
+            dispatch(changeCategory(category))
         }
+    }
+
+    const addProductClickHandler = (e: React.MouseEvent<HTMLDivElement>) => {
+        dispatch(deleteEditableProduct())
+        dispatch(changeShowing(true))
     }
 
     return (
         <div className="catalog">
-            <div className="catalog__page">
-                <div className="page__title">Главная</div>
-                <div className="page__subpage">{subpage}</div>
-            </div>
+            <PagesLinks>
+                <div>Главная</div>
+                <div>Косметика и гигиена</div>
+            </PagesLinks>
 
             <div className="catalog__view">
                 <div className="view__top">
                     <div className="view__left-part">
                         <div className="view__subpage">
-                            <span>{subpage}</span>
+                            <span>Косметика и гигиена</span>
                         </div>
-                        <div
-                            className="view__add-product"
-                            onClick={(e) => {
-                                dispatch(deleteEditableProduct())
-                                dispatch(changeShowing(true))
-                            }}
-                        >
-                            <img src={Add} />
+                        <div className="view__add-product" onClick={addProductClickHandler}>
+                            <img src={Add} alt="" />
                         </div>
                     </div>
                     <div className="view__sort">
@@ -110,22 +117,23 @@ function Catalog() {
                             onClick={imageSortClickHandler}
                             src={Show}
                             className={filterProducts.sort.isDecreasing ? '' : 'flip-horizontal'}
+                            alt=""
                         />
                     </div>
                 </div>
 
                 <div className="view__bottom">
-                    {categories.map((item, index) => (
+                    {categories.map(({ category, id }, index) => (
                         <div
                             key={index}
                             className={
-                                filterProducts.category === item.category
+                                filterProducts.category === id
                                     ? 'view__filter-item view__filter-item-active'
                                     : 'view__filter-item'
                             }
-                            onClick={(e) => filterClickHandler(e, item.category)}
+                            onClick={(e) => filterClickHandler(e, id)}
                         >
-                            <span>{item.category}</span>
+                            <span>{category}</span>
                         </div>
                     ))}
                 </div>

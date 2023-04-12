@@ -1,37 +1,54 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { IProduct } from '../models/IProduct'
 import Cart from '../../public/images/Cart.png'
 import Bottle from '../../public/images/Bottle.png'
 import Box from '../../public/images/Box.png'
 import Edit from '../../public/images/Edit.png'
 import { Link } from 'react-router-dom'
-import { cartSlice } from '../store/reducers/CartSlice'
+import { cartSlice } from '../store/reducers/slices/CartSlice'
 import { useAppDispatch } from '../hooks/redux'
 import { ICartItem } from '../models/ICart'
-import Editor from './Editor'
-import { editorSlice } from '../store/reducers/EditorSlice'
+import { editorSlice } from '../store/reducers/slices/EditorSlice'
+import { catalogPageURL, productionURL } from '../constants'
+import '../styles/product.scss'
 
 interface ProductProps {
     product: IProduct
 }
 
+const baseUrl = process.env.NODE_ENV === 'production' ? productionURL : ''
+
 const Product: FC<ProductProps> = ({ product }) => {
+    console.log(product.categories)
     const dispatch = useAppDispatch()
     const { addItem } = cartSlice.actions
 
     const { changeShowing, setEditableProduct } = editorSlice.actions
 
+    const addToCartClickHandler = (e: React.MouseEvent<HTMLDivElement>) => {
+        const cartItem: ICartItem = {
+            product: product,
+            count: 1,
+        }
+        dispatch(addItem(cartItem))
+    }
+
+    const editCartClickHandler = (e: React.MouseEvent<HTMLImageElement>) => {
+        dispatch(setEditableProduct(product))
+        dispatch(changeShowing(true))
+    }
+
     return (
         <div className="product">
             <div className="product__image">
-                <Link to={`/Sultan-store/catalog/` + product.id}>
-                    <img src={product.urlImage}></img>
+                <Link to={`${baseUrl}${catalogPageURL}/` + product.id}>
+                    <img src={product.urlImage} alt=""></img>
                 </Link>
             </div>
 
             <div className="product__wrapper">
                 <div className="product__size">
-                    <img src={product.sizeType.indexOf('л') >= 0 ? Bottle : Box} />
+                    <img src={product.sizeType.indexOf('л') >= 0 ? Bottle : Box} alt="" />
                     <div className="size__value">
                         {product.size} {product.sizeType}
                     </div>
@@ -59,26 +76,15 @@ const Product: FC<ProductProps> = ({ product }) => {
 
                 <div className="product__actions">
                     <div className="actions__price">{product.price} ₸</div>
-                    <div
-                        onClick={() => {
-                            const cartItem: ICartItem = {
-                                product: product,
-                                count: 1,
-                            }
-                            dispatch(addItem(cartItem))
-                        }}
-                        className="actions__button"
-                    >
+                    <div onClick={addToCartClickHandler} className="actions__button">
                         <div className="button__description">В корзину</div>
-                        <img src={Cart} />
+                        <img src={Cart} alt="" />
                     </div>
                     <img
-                        onClick={() => {
-                            dispatch(setEditableProduct(product))
-                            dispatch(changeShowing(true))
-                        }}
+                        onClick={editCartClickHandler}
                         className="actions__edit"
                         src={Edit}
+                        alt=""
                     />
                 </div>
             </div>

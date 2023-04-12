@@ -1,6 +1,10 @@
 const path = require('path')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const webpack = require('webpack')
+
+const isProd = process.env.NODE_ENV === 'production'
+const isDev = !isProd
 
 module.exports = {
     mode: 'development',
@@ -8,10 +12,15 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
-        publicPath: '',
+        publicPath: '/',
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js', '.jsx'],
+    },
+    devtool: 'source-map',
+    devServer: {
+        port: 3000,
+        historyApiFallback: true,
     },
     module: {
         rules: [
@@ -44,14 +53,13 @@ module.exports = {
             },
         ],
     },
-    devServer: {
-        port: 3000,
-        historyApiFallback: true,
-    },
     plugins: [
         new HTMLWebpackPlugin({
             template: './public/index.html',
         }),
         new MiniCssExtractPlugin(),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        }),
     ],
 }

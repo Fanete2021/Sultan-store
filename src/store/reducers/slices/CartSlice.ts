@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ICart, ICartItem } from '../../models/ICart'
+import { ICart, ICartItem } from '../../../models/ICart'
 
 const initialState: ICart = {
     items: [],

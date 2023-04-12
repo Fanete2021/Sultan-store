@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { IFilterProducts, ISort } from '../../models/IFilterProducts'
+import { IFilterProducts, ISort } from '../../../models/IFilterProducts'
 
 const initialState: IFilterProducts = {
     brands: [],
     minPrice: 0,
     maxPrice: 10000,
-    category: '',
+    category: 0,
     sort: {
         key: 'Название',
         isDecreasing: false,
@@ -26,14 +26,14 @@ export const filterProductsSlice = createSlice({
         changeMaxPrice(state, action: PayloadAction<number>) {
             state.maxPrice = action.payload
         },
-        changeCategory(state, action: PayloadAction<string>) {
+        changeCategory(state, action: PayloadAction<number>) {
             state.category = action.payload
             state.subcategories = []
         },
         changeSort(state, action: PayloadAction<ISort>) {
             state.sort = action.payload
         },
-        changeSubcategories(state, action: PayloadAction<string[]>) {
+        changeSubcategories(state, action: PayloadAction<number[]>) {
             state.subcategories = action.payload
         },
     },

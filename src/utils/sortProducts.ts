@@ -20,7 +20,8 @@ export const sortProducts = (products: IProduct[], filter: IFilterProducts): IPr
             (!category || product.categories.includes(category)) &&
             product.price >= minPrice &&
             product.price <= maxPrice &&
-            (!subcategories.length || subcategories.indexOf(product.subcategory) >= 0)
+            (!subcategories.length ||
+                (product.subcategory && subcategories.indexOf(product.subcategory) >= 0))
     )
 
     return sortedProducts

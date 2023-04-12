@@ -9,6 +9,6 @@ export interface IProduct {
     brand: string
     description: string
     price: number
-    categories: string[]
-    subcategory: string
+    categories: number[]
+    subcategory?: number
 }

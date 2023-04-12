@@ -8,8 +8,10 @@ import Consultant from '../../public/images/Consultant.png'
 import Download from '../../public/images/Download.png'
 import Cart from '../../public/images/Cart.png'
 import Burger from '../../public/images/Burger.png'
-import { useAppSelector } from '../hooks/redux'
 import { Link } from 'react-router-dom'
+import { cartPageURL, catalogPageURL, productionURL } from '../constants'
+import { selectCart } from '../store/reducers/Selectors'
+import '../styles/header.scss'
 
 interface IContact {
     img: string
@@ -17,52 +19,54 @@ interface IContact {
     description: string
 }
 
+const contacts: IContact[] = [
+    {
+        img: Location,
+        title: 'г. Кокчетав, ул. Ж. Ташенова 129Б',
+        description: '(Рынок Восточный)',
+    },
+    {
+        img: Email,
+        title: 'opt.sultan@mail.ru',
+        description: 'На связи в любое время',
+    },
+]
+
 interface ILink {
     description: string
 }
 
+const links: ILink[] = [
+    {
+        description: 'О компании',
+    },
+    {
+        description: 'Доставка и оплата',
+    },
+    {
+        description: 'Возврат',
+    },
+    {
+        description: 'Контакты',
+    },
+]
+
+const baseUrl = process.env.NODE_ENV === 'production' ? productionURL : ''
+
 const Header: FC = () => {
-    const contacts: IContact[] = [
-        {
-            img: Location,
-            title: 'г. Кокчетав, ул. Ж. Ташенова 129Б',
-            description: '(Рынок Восточный)',
-        },
-        {
-            img: Email,
-            title: 'opt.sultan@mail.ru',
-            description: 'На связи в любое время',
-        },
-    ]
-
-    const links: ILink[] = [
-        {
-            description: 'О компании',
-        },
-        {
-            description: 'Доставка и оплата',
-        },
-        {
-            description: 'Возврат',
-        },
-        {
-            description: 'Контакты',
-        },
-    ]
-
-    const cart = useAppSelector((state) => state.cartReducer)
+    const cart = selectCart()
 
     return (
         <div className="header">
             <div className="header__burger">
-                <img src={Burger} />
+                <img src={Burger} alt="" />
             </div>
 
             <div className="header__info">
                 <div className="info__contacts">
                     {contacts.map((contact, index) => (
                         <div key={index} className="info__contact">
-                            <img src={contact.img}></img>
+                            <img src={contact.img} alt=""></img>
 
                             <div>
                                 <span className="contact__title">{contact.title}</span>
@@ -87,20 +91,20 @@ const Header: FC = () => {
             <div className="header__active">
                 <div className="active__left">
                     <div className="active__image-company">
-                        <img src={Sultan}></img>
+                        <img src={Sultan} alt=""></img>
                     </div>
 
-                    <Link to={`/Sultan-store/catalog`}>
+                    <Link to={`${baseUrl}${catalogPageURL}`}>
                         <div className="active__catalog">
                             <span>Каталог</span>
-                            <img src={Catalog}></img>
+                            <img src={Catalog} alt=""></img>
                         </div>
                     </Link>
 
                     <div className="active__search">
                         <input placeholder="Поиск..."></input>
                         <div className="search__icon">
-                            <img src={Magnifier}></img>
+                            <img src={Magnifier} alt=""></img>
                         </div>
                     </div>
                 </div>
@@ -112,19 +116,19 @@ const Header: FC = () => {
                             <div className="info__schedule">время работы: 9:00-20:00</div>
                             <div className="info__call">Заказать звонок</div>
                         </div>
-                        <img src={Consultant}></img>
+                        <img src={Consultant} alt=""></img>
                     </div>
 
                     <div className="right__separation">
                         <div className="active__price-list">
                             <span>Прайс-лист</span>
-                            <img src={Download}></img>
+                            <img src={Download} alt=""></img>
                         </div>
                     </div>
 
-                    <Link to={`/Sultan-store/cart`}>
+                    <Link to={`${baseUrl}${cartPageURL}`}>
                         <div className="active__cart">
-                            <img src={Cart}></img>
+                            <img src={Cart} alt=""></img>
                             <div className="active__cart__items">{cart.countAll}</div>
                             <div className="active__cart__total">
                                 <div className="active__cart__title">Корзина</div>

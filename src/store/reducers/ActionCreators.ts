@@ -1,13 +1,14 @@
 import { IProduct } from '../../models/IProduct'
-import db from '../../../db.json'
+import productsDB from '../../../data/products.json'
+import categoriesDB from '../../../data/categories.json'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import {
     checkItemInLocalStorage,
     getProductsFromLocalStorage,
     uploadProductsFromLocalStorage,
 } from '../../utils/localStorage'
+import { ICategory } from '../../models/ICategory'
 
-//предполагается функция не для локального хранилища
 export const fetchProducts = createAsyncThunk('product/fetchAll', async (_, thunkAPI) => {
     try {
         let products: IProduct[] = []
@@ -20,12 +21,24 @@ export const fetchProducts = createAsyncThunk('product/fetchAll', async (_, thun
             }
         }
 
-        products = Object.values(db).map((product) => ({ ...product } as IProduct))
+        products = Object.values(productsDB).map((product) => ({ ...product } as IProduct))
 
         uploadProductsFromLocalStorage(products)
 
         return products
     } catch (e: any) {
         return thunkAPI.rejectWithValue('Не удалось загрузить список товаров')
+    }
+})
+
+export const fetchCategories = createAsyncThunk('category/fetchAll', async (_, thunkAPI) => {
+    try {
+        let categories: ICategory[] = Object.values(categoriesDB).map(
+            (category) => ({ ...category } as ICategory)
+        )
+
+        return categories
+    } catch (e: any) {
+        return thunkAPI.rejectWithValue('Не удалось загрузить список категорий')
     }
 })
