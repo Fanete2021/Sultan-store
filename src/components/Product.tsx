@@ -19,7 +19,6 @@ interface ProductProps {
 const baseUrl = process.env.NODE_ENV === 'production' ? productionURL : ''
 
 const Product: FC<ProductProps> = ({ product }) => {
-    console.log(product.categories)
     const dispatch = useAppDispatch()
     const { addItem } = cartSlice.actions
 

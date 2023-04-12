@@ -7,7 +7,7 @@ const isProd = process.env.NODE_ENV === 'production'
 const isDev = !isProd
 
 module.exports = {
-    mode: 'development',
+    mode: isDev ? 'development' : 'production',
     entry: './src/index.tsx',
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -17,7 +17,7 @@ module.exports = {
     resolve: {
         extensions: ['.tsx', '.ts', '.js', '.jsx'],
     },
-    devtool: 'source-map',
+    devtool: isDev ? 'source-map' : false,
     devServer: {
         port: 3000,
         historyApiFallback: true,
@@ -40,7 +40,15 @@ module.exports = {
             },
             {
                 test: /\.(png|jpe?g|gif)$/i,
-                type: 'asset/resource',
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'images/',
+                        },
+                    },
+                ],
             },
             {
                 test: /\.s[ac]ss$/i,
@@ -58,8 +66,5 @@ module.exports = {
             template: './public/index.html',
         }),
         new MiniCssExtractPlugin(),
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-        }),
     ],
 }
