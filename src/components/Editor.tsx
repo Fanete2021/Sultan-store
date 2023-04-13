@@ -3,12 +3,12 @@ import { IProduct } from '../models/IProduct'
 import Close from '../../public/images/Close.png'
 import Trash from '../../public/images/Trash.png'
 import Save from '../../public/images/Save.png'
-import { useAppDispatch, useAppSelector } from '../hooks/redux'
+import { useAppDispatch } from '../hooks/redux'
 import { editorSlice } from '../store/reducers/slices/EditorSlice'
 import { productSlice } from '../store/reducers/slices/ProductSlice'
 import { cartSlice } from '../store/reducers/slices/CartSlice'
 import '../styles/editor.scss'
-import { selectCategories } from '../store/reducers/Selectors'
+import { selectCategories, selectEditor } from '../store/reducers/Selectors'
 
 const initialState: IProduct = {
     id: new Date().getTime(),
@@ -27,7 +27,7 @@ const initialState: IProduct = {
 
 const Editor: FC = () => {
     const dispatch = useAppDispatch()
-    const { product } = useAppSelector((state) => state.editorReducer)
+    const { product } = selectEditor()
     const [editableProduct, setEditableProduct] = useState<IProduct>(initialState)
 
     const { categories } = selectCategories()
@@ -199,11 +199,15 @@ const Editor: FC = () => {
                 </div>
 
                 <div className="editor__actions">
-                    <div className="actions__save" onClick={clickHandlerSave}>
+                    <div className="actions__save" onClick={clickHandlerSave} data-testid="save">
                         <img src={Save} alt="" />
                     </div>
                     {product && (
-                        <div className="actions__delete" onClick={clickHandlerDelete}>
+                        <div
+                            className="actions__delete"
+                            onClick={clickHandlerDelete}
+                            data-testid="trash"
+                        >
                             <img src={Trash} alt="" />
                         </div>
                     )}

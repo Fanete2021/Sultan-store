@@ -10,10 +10,11 @@ import Download from '../../public/images/Download.png'
 import Show from '../../public/images/Show.png'
 import { cartSlice } from '../store/reducers/slices/CartSlice'
 import { ICartItem } from '../models/ICart'
-import { catalogPageURL } from '../constants'
+import { catalogPageURL, baseUrl } from '../constants'
 import { selectProducts } from '../store/reducers/Selectors'
 import PagesLinks from '../components/PagesLinks'
 import '../styles/productPage.scss'
+import { checkUrlImage } from '../utils/checkUrlImage'
 
 interface ProductPageParams {
     id: string
@@ -61,7 +62,7 @@ const ProductPage: FC = () => {
         <div className="product-page">
             <PagesLinks>
                 <div>Главная</div>
-                <Link to={`${catalogPageURL}`}>Каталог</Link>
+                <Link to={`${baseUrl}${catalogPageURL}`}>Каталог</Link>
                 <div>{product?.title}</div>
             </PagesLinks>
 
@@ -84,8 +85,8 @@ const ProductPage: FC = () => {
                         <img
                             src={
                                 product?.sizeType && product?.sizeType.indexOf('л') >= 0
-                                    ? Bottle
-                                    : Box
+                                    ? checkUrlImage(Bottle, 'Bottle.png')
+                                    : checkUrlImage(Box, 'Box.png')
                             }
                             alt=""
                         />
@@ -109,13 +110,13 @@ const ProductPage: FC = () => {
 
                         <div className="page__buy__button" onClick={buyClickHandler}>
                             <div className="button__description">В корзину</div>
-                            <img src={Cart} alt="" />
+                            <img src={checkUrlImage(Cart, 'Cart.png')} alt="" />
                         </div>
                     </div>
 
                     <div className="product__activities">
                         <div className="activities__share">
-                            <img src={Share} alt="" />
+                            <img src={checkUrlImage(Share, 'Share.png')} alt="" />
                         </div>
                         <div className="activities__promotion">
                             При покупке от <span>10 000 ₸</span> бесплатная <br />
@@ -123,7 +124,7 @@ const ProductPage: FC = () => {
                         </div>
                         <div className="activities__price-list">
                             <span>Прайс-лист</span>
-                            <img src={Download} alt="" />
+                            <img src={checkUrlImage(Download, 'Download.png')} alt="" />
                         </div>
                     </div>
 
@@ -135,7 +136,7 @@ const ProductPage: FC = () => {
                             <img
                                 onClick={(e) => setIsShowDescription(!isShowDescription)}
                                 className={isShowDescription ? '' : 'rotate'}
-                                src={Show}
+                                src={checkUrlImage(Show, 'Show.png')}
                                 alt=""
                             />
                         </div>
@@ -159,7 +160,7 @@ const ProductPage: FC = () => {
                             <img
                                 onClick={(e) => setIsShowCharacteristics(!isShowCharacteristics)}
                                 className={isShowCharacteristics ? '' : 'rotate'}
-                                src={Show}
+                                src={checkUrlImage(Show, 'Show.png')}
                                 alt=""
                             />
                         </div>

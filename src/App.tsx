@@ -20,12 +20,12 @@ function App() {
     }, [])
 
     return (
-        <BrowserRouter basename={baseUrl}>
+        <BrowserRouter>
             <MainContainer>
                 <Routes>
-                    <Route path={`${catalogPageURL}`} element={<Catalog />} />
-                    <Route path={`${catalogPageURL}/:id`} element={<ProductPage />} />
-                    <Route path={`${cartPageURL}`} element={<Cart />} />
+                    <Route path={`${baseUrl}${catalogPageURL}}`} element={<Catalog />} />
+                    <Route path={`${baseUrl}${catalogPageURL}/:id`} element={<ProductPage />} />
+                    <Route path={`${baseUrl}${cartPageURL}`} element={<Cart />} />
                     <Route path="*" element={<Catalog />} />
                 </Routes>
             </MainContainer>

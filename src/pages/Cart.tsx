@@ -5,7 +5,7 @@ import { cartSlice } from '../store/reducers/slices/CartSlice'
 import Bottle from '../../public/images/Bottle.png'
 import Box from '../../public/images/Box.png'
 import Trash from '../../public/images/Trash.png'
-import { catalogPageURL } from '../constants'
+import { baseUrl, catalogPageURL } from '../constants'
 import { selectCart } from '../store/reducers/Selectors'
 import PagesLinks from '../components/PagesLinks'
 import '../styles/cart.scss'
@@ -19,7 +19,7 @@ function Cart() {
     return (
         <div className="cart">
             <PagesLinks>
-                <Link to={`${catalogPageURL}`}>Главная</Link>
+                <Link to={`${baseUrl}${catalogPageURL}`}>Главная</Link>
                 <div>Корзина</div>
             </PagesLinks>
 

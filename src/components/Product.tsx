@@ -9,7 +9,7 @@ import { cartSlice } from '../store/reducers/slices/CartSlice'
 import { useAppDispatch } from '../hooks/redux'
 import { ICartItem } from '../models/ICart'
 import { editorSlice } from '../store/reducers/slices/EditorSlice'
-import { catalogPageURL } from '../constants'
+import { baseUrl, catalogPageURL } from '../constants'
 import '../styles/product.scss'
 
 interface ProductProps {
@@ -38,7 +38,7 @@ const Product: FC<ProductProps> = ({ product }) => {
     return (
         <div className="product">
             <div className="product__image">
-                <Link to={`${catalogPageURL}/` + product.id}>
+                <Link to={`${baseUrl}${catalogPageURL}/` + product.id}>
                     <img src={product.urlImage} alt=""></img>
                 </Link>
             </div>
@@ -73,7 +73,11 @@ const Product: FC<ProductProps> = ({ product }) => {
 
                 <div className="product__actions">
                     <div className="actions__price">{product.price} ₸</div>
-                    <div onClick={addToCartClickHandler} className="actions__button">
+                    <div
+                        onClick={addToCartClickHandler}
+                        className="actions__button"
+                        data-testid="cart"
+                    >
                         <div className="button__description">В корзину</div>
                         <img src={Cart} alt="" />
                     </div>
@@ -82,6 +86,7 @@ const Product: FC<ProductProps> = ({ product }) => {
                         className="actions__edit"
                         src={Edit}
                         alt=""
+                        data-testid="editor"
                     />
                 </div>
             </div>

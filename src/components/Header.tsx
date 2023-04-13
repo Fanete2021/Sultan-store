@@ -9,7 +9,7 @@ import Download from '../../public/images/Download.png'
 import Cart from '../../public/images/Cart.png'
 import Burger from '../../public/images/Burger.png'
 import { Link } from 'react-router-dom'
-import { cartPageURL, catalogPageURL } from '../constants'
+import { baseUrl, cartPageURL, catalogPageURL } from '../constants'
 import { selectCart } from '../store/reducers/Selectors'
 import '../styles/header.scss'
 
@@ -92,7 +92,7 @@ const Header: FC = () => {
                         <img src={Sultan} alt=""></img>
                     </div>
 
-                    <Link to={`${catalogPageURL}`}>
+                    <Link to={`${baseUrl}${catalogPageURL}`}>
                         <div className="active__catalog">
                             <span>Каталог</span>
                             <img src={Catalog} alt=""></img>
@@ -124,7 +124,7 @@ const Header: FC = () => {
                         </div>
                     </div>
 
-                    <Link to={`${cartPageURL}`}>
+                    <Link to={`${baseUrl}${cartPageURL}`}>
                         <div className="active__cart">
                             <img src={Cart} alt=""></img>
                             <div className="active__cart__items">{cart.countAll}</div>
